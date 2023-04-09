@@ -1,0 +1,59 @@
+import unittest
+from NumbersInWords import NumbersInWords
+
+class TestNumberToWords(unittest.TestCase):
+
+    def test_notint(self):
+        self.assertEqual(NumbersInWords(""),"only integers allowed")
+        self.assertEqual(NumbersInWords("550"),"only integers allowed")
+        self.assertEqual(NumbersInWords(5.23),"only integers allowed")
+        self.assertEqual(NumbersInWords("twenty six"),"only integers allowed")
+        self.assertEqual(NumbersInWords(-64.8238),"only integers allowed")
+
+    def test_negativeinput(self):
+        self.assertEquals(NumbersInWords(-1),"Please enter a positive number")
+        self.assertEquals(NumbersInWords(-505608),"Please enter a positive number")
+        self.assertEquals(NumbersInWords(-540506),"Please enter a positive number")
+    
+    def test_inputtoolarge(self):
+        self.assertEquals(NumbersInWords(1000000001),"highest number allowed is 999.999.999")
+        self.assertEquals(NumbersInWords(1562358889),"highest number allowed is 999.999.999")
+        self.assertEquals(NumbersInWords(9564231589),"highest number allowed is 999.999.999")
+        self.assertEquals(NumbersInWords(1111111111),"highest number allowed is 999.999.999")
+        self.assertEquals(NumbersInWords(8569999999999),"highest number allowed is 999.999.999")
+
+    def test_zero(self):
+        self.assertEqual(NumbersInWords(0), "zero")
+
+    def test_single_digit(self):
+        self.assertEqual(NumbersInWords(1), "one")
+        self.assertEqual(NumbersInWords(5), "five")
+
+    def test_double_digits(self):
+        self.assertEqual(NumbersInWords(10), "ten")
+        self.assertEqual(NumbersInWords(11), "eleven")
+        self.assertEqual(NumbersInWords(20), "twenty")
+        self.assertEqual(NumbersInWords(25), "twenty five")
+        self.assertEqual(NumbersInWords(99), "ninety nine")
+
+    def test_hundreds(self):
+        self.assertEqual(NumbersInWords(100), "one hundred")
+        self.assertEqual(NumbersInWords(123), "one hundred twenty three")
+        self.assertEqual(NumbersInWords(900), "nine hundred")
+        self.assertEqual(NumbersInWords(999), "nine hundred ninety nine")
+
+    def test_thousands(self):
+        self.assertEqual(NumbersInWords(1000), "one thousand")
+        self.assertEqual(NumbersInWords(1234), "one thousand two hundred thirty four")
+        self.assertEqual(NumbersInWords(10000), "ten thousand")
+        self.assertEqual(NumbersInWords(98765), "ninety eight thousand seven hundred sixty five")
+
+    def test_millions(self):
+        self.assertEqual(NumbersInWords(1000000), "one million")
+        self.assertEqual(NumbersInWords(1234567), "one million two hundred thirty four thousand five hundred sixty seven")
+        self.assertEqual(NumbersInWords(10000000), "ten million")
+        self.assertEqual(NumbersInWords(87654321), "eighty seven million six hundred fifty four thousand three hundred twenty one")
+
+
+if __name__ == '__main__':
+    unittest.main()
